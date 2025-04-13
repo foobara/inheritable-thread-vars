@@ -1,6 +1,8 @@
 class Thread
   if const_defined?(:ThreadParent)
+    # :nocov:
     raise "Thread::ThreadParent has already been declared elsewhere. Bailing out instead of clobbering it!"
+    # :nocov:
   end
 
   module ThreadParent
@@ -18,7 +20,9 @@ class Thread
           child = Thread.current
 
           if child.instance_variable_defined?(:@thread_parent)
+            # :nocov:
             raise "@thread_parent has already been declared elsewhere. Bailing out instead of clobbering it!"
+            # :nocov:
           end
 
           child.instance_variable_set("@thread_parent", parent)
@@ -27,8 +31,10 @@ class Thread
 
           if parent_inheritable_thread_locals
             if child.instance_variable_defined?(:@inheritable_thread_locals)
+              # :nocov:
               raise "@inheritable_thread_locals has already been declared elsewhere. " \
                     "Bailing out instead of clobbering it!"
+              # :nocov:
             end
 
             child.instance_variable_set("@inheritable_thread_locals", parent_inheritable_thread_locals.dup)
@@ -43,6 +49,18 @@ class Thread
   class << self
     prepend(ThreadParent::ThreadClassExtensions)
 
+    %i[
+      inheritable_thread_local_var_get
+      inheritable_thread_local_var_set
+      with_inheritable_thread_local_var
+    ].each do |method_name|
+      if method_defined?(method_name)
+        # :nocov:
+        raise "Thread.#{method_name} has already been declared elsewhere. Bailing out instead of clobbering it!"
+        # :nocov:
+      end
+    end
+
     def inheritable_thread_local_var_get(...)
       Thread.current.inheritable_thread_local_var_get(...)
     end
@@ -53,6 +71,18 @@ class Thread
 
     def with_inheritable_thread_local_var(...)
       Thread.current.with_inheritable_thread_local_var(...)
+    end
+  end
+
+  %i[
+    inheritable_thread_local_var_get
+    inheritable_thread_local_var_set
+    with_inheritable_thread_local_var
+  ].each do |method_name|
+    if method_defined?(method_name)
+      # :nocov:
+      raise "Thread##{method_name} has already been declared elsewhere. Bailing out instead of clobbering it!"
+      # :nocov:
     end
   end
 
