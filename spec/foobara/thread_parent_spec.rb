@@ -23,4 +23,22 @@ RSpec.describe Foobara::ThreadParent do
       expect(Thread.foobara_var_get("test")).to be_nil
     end
   end
+
+  describe ".foobara_with_var" do
+    it "gives a convenient way to set a variable, execute a block, and set it back" do
+      expect(Thread.foobara_var_get("test")).to be_nil
+
+      Thread.foobara_with_var("test", "initial") do
+        expect(Thread.foobara_var_get("test")).to eq("initial")
+
+        Thread.foobara_with_var("test", "new") do
+          expect(Thread.foobara_var_get("test")).to eq("new")
+        end
+
+        expect(Thread.foobara_var_get("test")).to eq("initial")
+      end
+
+      expect(Thread.foobara_var_get("test")).to be_nil
+    end
+  end
 end
