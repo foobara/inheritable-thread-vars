@@ -1,6 +1,6 @@
 ## [0.0.1] - 2025-04-12
 
-- Re-released as thread-parent instead of foobara-thread-parent
+- Re-release as inheritable-thread-vars instead of foobara-thread-parent
 - Cleaned up the git history a bit
 - Removed unnecessary Foobara prefixes/namespaces since this gem is used-by but independent of foobara
 

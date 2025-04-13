@@ -1,4 +1,4 @@
-# thread-parent gem
+# inheritable-thread-vars gem
 
 Thread variables are specific to their threads but perhaps you might find yourself
 in a situation where you would like to set a thread variable to something that is also
@@ -7,13 +7,13 @@ this gem lets you do just that!
 
 ## Installation
 
-Typical stuff: add `gem "thread-parent"` to your Gemfile or .gemspec file. Or even just
-`gem install thread-parent` if just playing with it directly in scripts.
+Typical stuff: add `gem "inheritable-thread-vars"` to your Gemfile or .gemspec file. Or even just
+`gem install inheritable-thread-vars` if just playing with it directly in scripts.
 
 ## Usage
 
 ```ruby
-require "thread-parent"
+require "inheritable-thread-vars"
 
 Thread.inheritable_thread_local_var_set("some_var", "parent_value")
 Thread.inheritable_thread_local_var_get("some_var") # "parent_value"
@@ -30,7 +30,7 @@ Thread.inheritable_thread_local_var_get("some_var") # "parent_value"
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub
-at https://github.com/foobara/thread-parent
+at https://github.com/foobara/inheritable-thread-vars
 
 ## License
 

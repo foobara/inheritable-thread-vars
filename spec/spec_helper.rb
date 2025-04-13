@@ -18,4 +18,4 @@ end
 Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
 
 require "foobara/spec_helpers/all"
-require "thread_parent"
+require "inheritable_thread_vars"

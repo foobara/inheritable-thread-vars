@@ -1,11 +1,11 @@
 class Thread
-  if const_defined?(:ThreadParent)
+  if const_defined?(:InheritableThreadVars)
     # :nocov:
-    raise "Thread::ThreadParent has already been declared elsewhere. Bailing out instead of clobbering it!"
+    raise "Thread::InheritableThreadVars has already been declared elsewhere. Bailing out instead of clobbering it!"
     # :nocov:
   end
 
-  module ThreadParent
+  module InheritableThreadVars
     # If we try to perform a simpler approach to setting the parent via overriding Thread#initialize,
     # we run into the following error:
     # ThreadError:
@@ -47,7 +47,7 @@ class Thread
   end
 
   class << self
-    prepend(ThreadParent::ThreadClassExtensions)
+    prepend(InheritableThreadVars::ThreadClassExtensions)
 
     %i[
       inheritable_thread_local_var_get

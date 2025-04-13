@@ -1,4 +1,4 @@
-RSpec.describe Thread::ThreadParent do
+RSpec.describe Thread::InheritableThreadVars do
   describe "#inheritable_thread_local_var_set and #inheritable_thread_local_var_get" do
     it "inherits from parent threads and overrides locally" do
       outer = Thread.new do

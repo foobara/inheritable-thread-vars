@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    thread-parent (0.0.1)
+    inheritable-thread-vars (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -12,7 +12,6 @@ GEM
     date (3.4.1)
     diff-lcs (1.6.1)
     docile (1.4.1)
-    ffi (1.17.1)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -150,7 +149,6 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
-  ruby
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
@@ -161,6 +159,7 @@ DEPENDENCIES
   foobara-rubocop-rules (~> 0.0.1)
   foobara-spec-helpers (~> 0.0.1)
   guard-rspec
+  inheritable-thread-vars!
   irb
   pry
   pry-byebug
@@ -171,7 +170,6 @@ DEPENDENCIES
   rubocop-rspec
   ruby-prof
   simplecov
-  thread-parent!
 
 RUBY VERSION
    ruby 3.4.2p28

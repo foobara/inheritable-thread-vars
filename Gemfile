@@ -1,7 +1,7 @@
 require_relative "version"
 
 source "https://rubygems.org"
-ruby ThreadParentVersion::MINIMUM_RUBY_VERSION
+ruby InheritableThreadVarsVersion::MINIMUM_RUBY_VERSION
 
 gemspec
 
