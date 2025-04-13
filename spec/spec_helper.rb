@@ -20,4 +20,4 @@ end
 Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
 
 require "foobara/spec_helpers/all"
-require "foobara/thread_parent"
+require "thread_parent"

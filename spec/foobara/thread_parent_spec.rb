@@ -1,4 +1,4 @@
-RSpec.describe Foobara::ThreadParent do
+RSpec.describe Thread::ThreadParent do
   describe "#foobara_var_set and #foobara_var_get" do
     it "inherits from parent threads and overrides locally" do
       outer = Thread.new do
