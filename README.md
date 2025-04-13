@@ -15,16 +15,16 @@ Typical stuff: add `gem "foobara-thread-parent"` to your Gemfile or .gemspec fil
 ```ruby
 require "foobara/thread-parent"
 
-Thread.foobara_var_set("some_var", "parent_value")
-Thread.foobara_var_get("some_var") # "parent_value"
+Thread.inheritable_thread_local_var_set("some_var", "parent_value")
+Thread.inheritable_thread_local_var_get("some_var") # "parent_value"
 
 Thread.new do
-  Thread.foobara_var_get("some_var") # "parent_value"
-  Thread.foobara_var_set("some_var", "child_value")
-  Thread.foobara_var_get("some_var") # "child_value"
+  Thread.inheritable_thread_local_var_get("some_var") # "parent_value"
+  Thread.inheritable_thread_local_var_set("some_var", "child_value")
+  Thread.inheritable_thread_local_var_get("some_var") # "child_value"
 end
 
-Thread.foobara_var_get("some_var") # "parent_value"
+Thread.inheritable_thread_local_var_get("some_var") # "parent_value"
 ```
 
 ## Contributing

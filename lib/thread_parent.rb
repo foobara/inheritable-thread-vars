@@ -43,45 +43,39 @@ class Thread
   class << self
     prepend(ThreadParent::ThreadClassExtensions)
 
-    def foobara_var_get(...)
-      Thread.current.foobara_var_get(...)
+    def inheritable_thread_local_var_get(...)
+      Thread.current.inheritable_thread_local_var_get(...)
     end
 
-    def foobara_var_set(...)
-      Thread.current.foobara_var_set(...)
+    def inheritable_thread_local_var_set(...)
+      Thread.current.inheritable_thread_local_var_set(...)
     end
 
-    def foobara_with_var(...)
-      Thread.current.foobara_with_var(...)
+    def with_inheritable_thread_local_var(...)
+      Thread.current.with_inheritable_thread_local_var(...)
     end
   end
-
-  if method_defined?(:thread_parent)
-    raise "Thread#thread_parent has already been declared elsewhere. Bailing out instead of clobbering it!"
-  end
-
-  attr_reader :thread_parent
 
   # NOTE: because there's not a way to unset a thread variable, storing nil is used as deletion.
   # this means that a thread local variable with nil can't have any semantic meaning and should be
   # treated the same as if #thread_variable? had returned false.
-  def foobara_var_get(var_name)
+  def inheritable_thread_local_var_get(var_name)
     @inheritable_thread_locals&.[](var_name.to_sym)
   end
 
-  def foobara_var_set(var_name, value)
+  def inheritable_thread_local_var_set(var_name, value)
     @inheritable_thread_locals ||= {}
     @inheritable_thread_locals[var_name.to_sym] = value
   end
 
-  def foobara_with_var(key, value, &block)
-    old_value = foobara_var_get(key)
+  def with_inheritable_thread_local_var(key, value, &block)
+    old_value = inheritable_thread_local_var_get(key)
 
     begin
-      foobara_var_set(key, value)
+      inheritable_thread_local_var_set(key, value)
       block.call
     ensure
-      foobara_var_set(key, old_value)
+      inheritable_thread_local_var_set(key, old_value)
     end
   end
 end
