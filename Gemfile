@@ -1,14 +1,13 @@
 require_relative "version"
 
 source "https://rubygems.org"
-ruby Foobara::ThreadParent::MINIMUM_RUBY_VERSION
+ruby ThreadParentVersion::MINIMUM_RUBY_VERSION
 
 gemspec
 
 gem "rake"
 
 group :development do
-  gem "foob"
   gem "foobara-rubocop-rules", "~> 0.0.1"
   gem "guard-rspec"
   gem "rubocop-rake"

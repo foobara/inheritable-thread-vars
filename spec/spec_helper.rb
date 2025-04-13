@@ -1,5 +1,3 @@
-ENV["FOOBARA_ENV"] = "test"
-
 require "bundler/setup"
 
 require "pry"

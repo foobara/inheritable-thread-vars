@@ -1,5 +1,4 @@
 RSpec.configure do |config|
-  # TODO: move this to foobara-spec-helpers project
   config.around(:each, :profile) do |example|
     require "ruby-prof"
     RubyProf.start
