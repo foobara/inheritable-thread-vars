@@ -4,16 +4,26 @@ class Thread
   end
 
   module ThreadParent
+    # If we try to perform a simpler approach to setting the parent via overriding Thread#initialize,
+    # we run into the following error:
+    # ThreadError:
+    #   uninitialized thread - check 'Thread#initialize'
+    # So instead we attack it higher up in by prepending an override to Thread.new
+    # and leaving Thread#initialize alone.
     module ThreadClassExtensions
-      def new(...)
+      def new(*, **, &block)
         parent = Thread.current
 
-        super.tap do |thread|
-          if thread.instance_variable_defined?(:@thread_parent)
+        super do
+          child = Thread.current
+
+          if child.instance_variable_defined?(:@thread_parent)
             raise "@thread_parent has already been declared elsewhere. Bailing out instead of clobbering it!"
           end
 
-          thread.instance_variable_set("@thread_parent", parent)
+          child.instance_variable_set("@thread_parent", parent)
+
+          block.call
         end
       end
     end
