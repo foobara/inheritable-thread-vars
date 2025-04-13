@@ -23,6 +23,17 @@ class Thread
 
           child.instance_variable_set("@thread_parent", parent)
 
+          parent_inheritable_thread_locals = parent.instance_variable_get(:@inheritable_thread_locals)
+
+          if parent_inheritable_thread_locals
+            if child.instance_variable_defined?(:@inheritable_thread_locals)
+              raise "@inheritable_thread_locals has already been declared elsewhere. " \
+                    "Bailing out instead of clobbering it!"
+            end
+
+            child.instance_variable_set("@inheritable_thread_locals", parent_inheritable_thread_locals.dup)
+          end
+
           block.call
         end
       end
@@ -54,14 +65,13 @@ class Thread
   # NOTE: because there's not a way to unset a thread variable, storing nil is used as deletion.
   # this means that a thread local variable with nil can't have any semantic meaning and should be
   # treated the same as if #thread_variable? had returned false.
-  def foobara_var_get(...)
-    value = thread_variable_get(...)
-
-    value.nil? ? thread_parent&.foobara_var_get(...) : value
+  def foobara_var_get(var_name)
+    @inheritable_thread_locals&.[](var_name.to_sym)
   end
 
-  def foobara_var_set(...)
-    thread_variable_set(...)
+  def foobara_var_set(var_name, value)
+    @inheritable_thread_locals ||= {}
+    @inheritable_thread_locals[var_name.to_sym] = value
   end
 
   def foobara_with_var(key, value, &block)
