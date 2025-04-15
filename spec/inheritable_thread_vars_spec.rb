@@ -41,4 +41,14 @@ RSpec.describe Thread::InheritableThreadVars do
       expect(Thread.inheritable_thread_local_var_get("test")).to be_nil
     end
   end
+
+  describe "#new" do
+    it "passes args through to its block just like the original Thread.new does" do
+      block_args = nil
+
+      Thread.new(5) { |*args| block_args = args }.join
+
+      expect(block_args).to eq([5])
+    end
+  end
 end

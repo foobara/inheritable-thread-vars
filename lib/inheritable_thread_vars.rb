@@ -16,7 +16,7 @@ class Thread
       def new(*, **, &block)
         parent = Thread.current
 
-        super do
+        super do |*args|
           child = Thread.current
 
           if child.instance_variable_defined?(:@thread_parent)
@@ -40,7 +40,7 @@ class Thread
             child.instance_variable_set("@inheritable_thread_locals", parent_inheritable_thread_locals.dup)
           end
 
-          block.call
+          block.call(*args)
         end
       end
     end

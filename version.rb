@@ -1,5 +1,5 @@
 module InheritableThreadVarsVersion
-  VERSION = "0.0.1".freeze
+  VERSION = "0.0.2".freeze
 
   local_ruby_version = File.read("#{__dir__}/.ruby-version").chomp
   local_ruby_version_minor = local_ruby_version[/\A(\d+\.\d+)\.\d+\z/, 1]

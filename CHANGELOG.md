@@ -1,4 +1,8 @@
-## [0.0.1] - 2025-04-12
+## [0.0.2] - 2025-04-14
+
+- Pass args to Thread.new to its receiving block
+
+## [0.0.1] - 2025-04-13
 
 - Re-release as inheritable-thread-vars instead of foobara-thread-parent
 - Cleaned up the git history a bit
